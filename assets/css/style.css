@@ -1,0 +1,29 @@
+.bg-greyblack {
+    background-color:#293039;
+}
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+    color: #00C2CB;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #00C2CB;
+}
+.credit{
+    color: #00C2CB;
+}
+main{
+    background-image: url(../img/building.jpg);
+    height: 533px;;
+    
+
+}
+.title{
+    color:whitesmoke;
+    padding-top: 200px;
+}
+
+footer{
+    height: 92px;
+}
+.form{
+    margin-top: 10px;
+}
