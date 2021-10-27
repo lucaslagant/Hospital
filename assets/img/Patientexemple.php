@@ -13,6 +13,7 @@ class Patient{
     private $_pdo;
 
 
+    // METHODE __CONSTRUCT
     public function __construct($lastname, $firstname, $birthdate, $phone, $mail){
         $this->_lastname = $lastname;
         $this->_firstname = $firstname;
@@ -20,7 +21,7 @@ class Patient{
         $this->_phone = $phone;
         $this->_mail = $mail;
         $this->_pdo = Database::connect();
-
+      
     }
   
     public function create(){

@@ -9,6 +9,8 @@
             id="lastname"
             value="<?=$lastname ?? ""?>"
             pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '\-]+$"
+            placeholder="Nom"
+            required
             >
         </p>
         <p><?=$error['lastname'] ?? null?></p>
@@ -20,6 +22,8 @@
             id="firstname"
             value="<?=$firstname ??""?>"
             pattern="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð '\-]+$"
+            placeholder="Prénom"
+            required
             >
         </p>
         <p><?=$error['firstname'] ?? null?></p>
@@ -30,20 +34,23 @@
             name="birthDate"
             id="birthDate"
             value="<?=$birthDate ?? ""?>"
+            required            
             >
         </p>
         <p><?=$error['birthDate'] ?? null?></p>
 
-        <label for="email">Entrée le mail du patient :</label>
+        <label for="mail">Entrée le mail du patient :</label>
         <p>
             <input
-            type="email"
-            name="email"
-            id="email"
-            value="<?=$email ?? ""?>"
+            type="mail"
+            name="mail"
+            id="mail"
+            value="<?=$mail ?? ""?>"
+            placeholder="Mail"
+            required
             >
         </p>
-        <p><?=$error['email'] ?? null?></p>
+        <p><?=$error['mail'] ?? null?></p>
         <label for="phone">Entrée le numéro de téléphone du patient :</label>
         <p>
             <input
@@ -51,6 +58,8 @@
             name="phone"
             id="phone"
             value="<?=$phone ?? ""?>"
+            placeholder="+33"
+            required
             >
         </p>
         <p><?=$error['phone'] ?? null?></p>      
