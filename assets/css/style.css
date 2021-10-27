@@ -27,3 +27,29 @@ footer{
 .form{
     margin-top: 10px;
 }
+.tableau-style{
+    border-collapse: collapse;
+    min-width: 400px;
+    width: auto;
+    cursor: pointer;
+    margin: 50px auto;
+    border: 2px solid #293039;
+}
+thead tr {
+    background-color: #293039;
+    color: #00C2CB;
+    text-align: left;
+}
+th,td{
+    padding: 15px 20px;    
+}
+tbody tr, td, th{
+    border: 1px solid grey;
+}
+tbody tr:nth-child(even){
+    background-color: rgb(182, 182, 182);
+}
+.iconInfo{
+    display: flex;
+    justify-content: center;
+}

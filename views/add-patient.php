@@ -63,7 +63,7 @@
             >
         </p>
         <p><?=$error['phone'] ?? null?></p>      
-        <input type="submit" value="Validé">
-        
+        <input type="submit" value="Valider">
+                
     </form>
 </div>
