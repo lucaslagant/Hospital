@@ -1,6 +1,6 @@
 <?php
 
-include(dirname(__FILE__).'/../utils/Database.php');
+require_once(dirname(__FILE__).'/../utils/Database.php');
 
 class Patient{
 
@@ -13,7 +13,7 @@ class Patient{
     private $_pdo;
 
 
-    public function __construct($lastname, $firstname, $birthdate, $phone, $mail){
+    public function __construct($lastname='', $firstname='', $birthdate='', $phone='', $mail=''){
         $this->_lastname = $lastname;
         $this->_firstname = $firstname;
         $this->_birthdate = $birthdate;
@@ -49,6 +49,34 @@ class Patient{
             return $errorMessage;
         }
 
+    }
+
+    public static function list(){    
+       
+        $pdo= Database::connect();
+
+        try{
+            $sql = 'SELECT `lastname`, `firstname` FROM `patients`';
+            $sth = $pdo->query($sql);
+            $patients = $sth->fetchAll();
+            return $patients;
+        }catch(PDOException $ex){
+            die('La requête a retourné une erreur: '. $ex->getMessage());
+        }
+    }
+
+    public static function info(){
+        
+        $pdo = Database::connect();
+
+        try{
+            $sql = 'SELECT * FROM `patients`';
+            $sth = $pdo->query($sql);
+            $info = $sth->fetchAll();
+            return $info;
+        }catch(PDOException $ex){
+            die('La requête a retourné une erreur: '. $ex->getMessage());
+        }
     }
     
 }

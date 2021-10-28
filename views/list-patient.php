@@ -9,14 +9,14 @@
     </thead>
     <tbody>
         <?php
-            $i=0;
-            foreach ($patients as $patient) {
+            $i=0;            
+            foreach ($patientArray as $patient) {
                 $i++;
                 echo '<tr>
                     <th scope="row">'.$i.'</th>                    
-                    <td>'.$patient["lastname"].'</td>
-                    <td>'.$patient["firstname"].'</td>
-                    <td><a class="iconInfo" href=""><img src="https://img.icons8.com/color/48/000000/add-property.png"/>           
+                    <td>'.$patient->lastname.'</td>
+                    <td>'.$patient->firstname.'</td>
+                    <td><a class="iconInfo" href="../controllers/profil-patient-controller.php"><img src="https://img.icons8.com/color/48/000000/add-property.png"/>           
                     </tr>';
             }
         ?>

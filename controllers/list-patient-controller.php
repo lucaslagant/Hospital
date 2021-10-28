@@ -1,18 +1,12 @@
 <?php
-require_once dirname(__FILE__).'/../utils/Database.php';
 require_once dirname(__FILE__).'/../config/bdd.php';
+require_once dirname(__FILE__).'/../models/Patient.php';
 
 $ex = 1;
 $title = 'Liste de tout les patients';
-$pdo = new PDO(DNS, USER, PASSWORD); 
 
-try{
-    $sql = 'SELECT `lastname`, `firstname` FROM `patients`';
-    $sth = $pdo->query($sql);
-    $patients = $sth->fetchAll(PDO::FETCH_ASSOC);
-}catch(PDOException $ex){
-    die('La requête a retourné une erreur: '. $ex->getMessage());
-}
+$patientArray= Patient::list();
+
    
 
 
