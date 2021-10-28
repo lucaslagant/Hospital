@@ -1,18 +1,14 @@
 <?php
 require_once dirname(__FILE__).'/../utils/Database.php';
 require_once dirname(__FILE__).'/../config/bdd.php';
+require_once dirname(__FILE__).'/../models/Patient.php';
 
-$ex = 1;
-$title = 'Liste de tout les patients';
-$pdo = new PDO(DNS, USER, PASSWORD); 
+$id = intval(trim(filter_input(INPUT_GET, 'patient', FILTER_SANITIZE_NUMBER_INT)));
 
-$ex = 1;
-$title = 'Liste de tout les patients';
-
-$infopatient = Patient::info(); 
-
-
-
+$patient = Patient::info($id);
+if(!is_object($patient)){
+    $messError = $patient;
+}
 
 // appel des fichiers
 include dirname(__FILE__)."/../views/templates/header.php";

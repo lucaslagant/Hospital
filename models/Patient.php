@@ -56,7 +56,7 @@ class Patient{
         $pdo= Database::connect();
 
         try{
-            $sql = 'SELECT `lastname`, `firstname` FROM `patients`';
+            $sql = 'SELECT  `id`, `lastname`, `firstname` FROM `patients`';
             $sth = $pdo->query($sql);
             $patients = $sth->fetchAll();
             return $patients;
@@ -65,17 +65,26 @@ class Patient{
         }
     }
 
-    public static function info(){
+    public static function info($id){
         
+         $sql = 'SELECT * FROM `patients` WHERE `id`= :id';
         $pdo = Database::connect();
+        try {
+            $sth = $pdo->prepare($sql);
 
-        try{
-            $sql = 'SELECT * FROM `patients`';
-            $sth = $pdo->query($sql);
-            $info = $sth->fetchAll();
-            return $info;
-        }catch(PDOException $ex){
-            die('La requête a retourné une erreur: '. $ex->getMessage());
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+            if($sth->execute()){
+                $patient = $sth->fetch();
+                if($patient){
+                    return $patient;
+                }else{
+                    return 'n\'existe pas';
+                }
+            }
+        }
+        catch (\PDOException $e) {
+            return $e->getMessage();
         }
     }
     

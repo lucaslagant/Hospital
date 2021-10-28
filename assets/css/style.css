@@ -53,3 +53,7 @@ tbody tr:nth-child(even){
     display: flex;
     justify-content: center;
 }
+.modifpatient{
+    display: flex;
+    justify-content:center;
+}

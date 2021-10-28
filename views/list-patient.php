@@ -11,12 +11,12 @@
         <?php
             $i=0;            
             foreach ($patientArray as $patient) {
-                $i++;
+                $i++;                
                 echo '<tr>
-                    <th scope="row">'.$i.'</th>                    
+                    <td>'.$patient->id.'</td>                 
                     <td>'.$patient->lastname.'</td>
                     <td>'.$patient->firstname.'</td>
-                    <td><a class="iconInfo" href="../controllers/profil-patient-controller.php"><img src="https://img.icons8.com/color/48/000000/add-property.png"/>           
+                    <td><a class="iconInfo" href="/controllers/profil-patient-controller.php?patient='.$patient->id.'"><img src="https://img.icons8.com/color/48/000000/add-property.png"/>           
                     </tr>';
             }
         ?>
