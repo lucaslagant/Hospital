@@ -67,7 +67,7 @@ class Patient{
 
     public static function info($id){
         
-         $sql = 'SELECT * FROM `patients` WHERE `id`= :id';
+        $sql = 'SELECT * FROM `patients` WHERE `id`= :id';
         $pdo = Database::connect();
         try {
             $sth = $pdo->prepare($sql);
@@ -86,6 +86,31 @@ class Patient{
         catch (\PDOException $e) {
             return $e->getMessage();
         }
+    }
+
+    public static function modify($id){
+        
+        $sql = 'UPDATE `patients` SET `lastname`= :lastname, `firstname`= :firstname, `birthdate`= :birthdate, `phone`= :phone, `mail`= :mail WHERE `id`= :id';
+        $pdo = Database::connect();
+        try {
+            $sth = $pdo->prepare($sql);
+
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+            if($sth->execute()){
+                $patient = $sth->fetch();
+                if($patient){
+                    return $patient;
+                }else{
+                    return 'n\'existe pas';
+                }
+            }
+        }
+        catch (\PDOException $e) {
+            return $e->getMessage();
+        } 
+
+
     }
     
 }

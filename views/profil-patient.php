@@ -22,5 +22,5 @@
     </tbody>
 </table>
 <div class="modifpatient">
-<a href="<?="/controllers/updatePatientController.php=.$patient->id" ?>"><button>Modifier les informations du patient</button></a>
+<a href="<?="/controllers/update-patient-controller.php?patient='.$patient->id.'"?>"><button>Modifier les informations du patient</button></a>
 </div>
