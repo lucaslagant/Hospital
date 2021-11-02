@@ -91,26 +91,16 @@ class Patient{
     public static function modify($id){
         
         $sql = 'UPDATE `patients` SET `lastname`= :lastname, `firstname`= :firstname, `birthdate`= :birthdate, `phone`= :phone, `mail`= :mail WHERE `id`= :id';
-        $pdo = Database::connect();
         try {
+            $pdo = Database::connect();
             $sth = $pdo->prepare($sql);
 
-            $sth->bindValue(':id', $id, PDO::PARAM_INT);
-
-            if($sth->execute()){
-                $patient = $sth->fetch();
-                if($patient){
-                    return $patient;
-                }else{
-                    return 'n\'existe pas';
-                }
-            }
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);            
         }
         catch (\PDOException $e) {
             return $e->getMessage();
-        } 
-
-
+        }
+        
     }
     
 }
