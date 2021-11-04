@@ -29,7 +29,7 @@ class Patient{
             $sql = 'INSERT INTO `patients`
             (`lastname`, `firstname`, `birthdate`, `phone`, `mail`)
             VALUES
-            (:lastname, :firstname, :birthdate, :phone, :mail)';
+            (:lastname, :firstname, :birthdate, :phone, :mail);';
     
             $sth = $this->_pdo->prepare($sql);
 
@@ -56,7 +56,7 @@ class Patient{
         $pdo= Database::connect();
 
         try{
-            $sql = 'SELECT  `id`, `lastname`, `firstname` FROM `patients`';
+            $sql = 'SELECT  `id`, `lastname`, `firstname` FROM `patients` ;';
             $sth = $pdo->query($sql);
             $patients = $sth->fetchAll();
             return $patients;
@@ -67,7 +67,7 @@ class Patient{
 
     public static function info($id){
         
-        $sql = 'SELECT * FROM `patients` WHERE `id`= :id';
+        $sql = 'SELECT * FROM `patients` WHERE `id`= :id ;';
         $pdo = Database::connect();
         try {
             $sth = $pdo->prepare($sql);
@@ -90,7 +90,7 @@ class Patient{
 
     public static function modify($id){
         
-        $sql = 'UPDATE `patients` SET `lastname`= :lastname, `firstname`= :firstname, `birthdate`= :birthdate, `phone`= :phone, `mail`= :mail WHERE `id`= :id';
+        $sql = 'UPDATE `patients` SET `lastname`= :lastname, `firstname`= :firstname, `birthdate`= :birthdate, `phone`= :phone, `mail`= :mail WHERE `id`= :id ;';
         try {
             $pdo = Database::connect();
             $sth = $pdo->prepare($sql);

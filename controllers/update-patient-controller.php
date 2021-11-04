@@ -9,6 +9,7 @@ $verif = null;
 $id = intval(trim(filter_input(INPUT_GET, 'patient', FILTER_SANITIZE_NUMBER_INT)));
 Patient::modify($id);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lastname = trim(filter_input(INPUT_POST,'lastname', FILTER_SANITIZE_STRING));
     if (!preg_match(REGEX_NO_NUMBER,$lastname)) {
