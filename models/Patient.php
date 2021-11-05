@@ -97,8 +97,8 @@ class Patient{
 
             $sth->bindValue(':id', $id, PDO::PARAM_INT);            
         }
-        catch (\PDOException $e) {
-            return $e->getMessage();
+        catch (\PDOException $ex) {
+            return $ex->getMessage();
         }
         
     }

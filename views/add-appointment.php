@@ -7,14 +7,19 @@
             type="datetime-local"
             name="dateHour"
             id="dateHour"
-            value=""
+            value="<?= htmlentities($_POST['dateHour'] ?? '')?>"
             required
             >
         </p>
         <label for="idPatients">Indiquer le patient</label>
         <p>
             <select name="patient" id="patient">
-
+            <?php foreach ($patients as $patient): 
+              $selected = ($patient_id === $patient->id) ? 'selected' : '';
+              
+            ?>
+              <option value="<?=$patient->id?>" <?=$selected?>><?=$patient->lastname?> <?=$patient->firstname?></option>
+            <?php endforeach ?>
             </select>
         </p>
         <input type="submit" value="Valider">

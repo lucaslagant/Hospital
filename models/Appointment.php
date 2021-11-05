@@ -1,27 +1,98 @@
-<?php
+<?php 
+class Appointment
+{
+	private $_dateHour,
+			$_idPatient,
+			$_pdo;
 
-require_once(dirname(__FILE__).'/../utils/Database.php');
+	public function __construct($dateHour, $patient_id)
+	{
+		try 
+		{
+			$this->_pdo = Database::connect();
+			$this->_dateHour = $dateHour;
+			$this->_idPatient = $patient_id;
+		}
+		catch (\PDOException $ex)
+		{
+			return $ex;
+		}
+	}
 
-class Appointment{
+	public function create()
+	{
+		// try 
+		// {
+		// 	if ($this->exist() === false)
+		// 	{
+		// 		$sth = $this->_pdo->prepare('INSERT INTO `appointments` (`dateHour`, `iPatients`) VALUES (:dateHour, :idPatients)');
 
-    private $_id;
-    private $_dateHour;
-    private $_idPatients;
+		// 		$sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
+		// 		$sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);
 
-    public function __construct($id='', $dateHour='', $idPatients='')
-    {
-        $this->_id=$id;
-        $this->_dateHour=$dateHour;
-        $this->_idPatients=$idPatients;
-        $this->_pdo = Database::connect();       
-    }
+				
+		// 		if (!$sth->execute()){
+		// 			throw new PDOException('Erreur dans la matrice. Un incident est arrivé durant \'enregistrement');
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		return $this->exist();
+		// 	}
+		// }
+		// catch (PDOException $ex) 
+		// {
+		// 	return $ex;
+		// }
+        try {
+            $sql = 'INSERT INTO `Appointment`
+            (`dateHour`, `idPatients`)
+            VALUES
+            (:dateHour, :idPatients);';
     
-    public function make($lastname, $firstname){
+            $sth = $this->_pdo->prepare($sql);
 
-        // try {
-        //     $sql = 'INSERT INTO `patients` ( `lastname` , `firstname`) VALUE (:lastname, :firstname);';
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
-    }
+            $sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
+            $sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);           
+
+            if(!$sth->execute()){
+                return 'Message d\'erreur';
+            }else{
+                return true;
+            }
+        }catch(\PDOException $ex) {
+            $errorMessage =  $ex->getMessage();
+            return $errorMessage;
+        }
+	}
+
+	public function exist()
+	{
+		try 
+		{
+			$sth = $this->_pdo->prepare('SELECT * FROM `appointments` WHERE `dateHour` = :dateHour AND `idPatients` = :idPatients ;');
+
+			$sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
+			$sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);
+
+			if ($sth->execute())
+			{
+				$result_fetch = $sth->fetch();
+				if ($result_fetch){
+					throw new PDOException('Les informations fournies correspondent à un rendez-vous existant.');
+
+				} else {
+					return false;					
+				}
+			} else {
+				throw new PDOException('Erreur dans la matrice. Un incident est arrivé durant la vérification des données.');
+			}	
+		}
+		catch (PDOException $ex) 
+		{
+			return $ex;
+		}
+	}
+
 }
+?>
