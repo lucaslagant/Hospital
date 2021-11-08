@@ -1,6 +1,6 @@
 <div class="text-center">
     <h1>Ajouter un rendez-vous</h1>
-    <form action="" method="POST">
+    <form  class="addAppointment" action="" method="POST">
         <label for="dateHour">Indiquer la date et l'heure du rendez-vous</label>
         <p>
             <input

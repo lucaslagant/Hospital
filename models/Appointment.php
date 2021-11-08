@@ -1,8 +1,11 @@
-<?php 
+<?php
+
+require_once(dirname(__FILE__).'/../utils/Database.php');
+
 class Appointment
 {
 	private $_dateHour,
-			$_idPatient,
+			$_idPatients,
 			$_pdo;
 
 	public function __construct($dateHour, $patient_id)
@@ -11,7 +14,7 @@ class Appointment
 		{
 			$this->_pdo = Database::connect();
 			$this->_dateHour = $dateHour;
-			$this->_idPatient = $patient_id;
+			$this->_idPatients = $patient_id;
 		}
 		catch (\PDOException $ex)
 		{
@@ -20,32 +23,9 @@ class Appointment
 	}
 
 	public function create()
-	{
-		// try 
-		// {
-		// 	if ($this->exist() === false)
-		// 	{
-		// 		$sth = $this->_pdo->prepare('INSERT INTO `appointments` (`dateHour`, `iPatients`) VALUES (:dateHour, :idPatients)');
-
-		// 		$sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
-		// 		$sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);
-
-				
-		// 		if (!$sth->execute()){
-		// 			throw new PDOException('Erreur dans la matrice. Un incident est arrivé durant \'enregistrement');
-		// 		}
-		// 	}
-		// 	else
-		// 	{
-		// 		return $this->exist();
-		// 	}
-		// }
-		// catch (PDOException $ex) 
-		// {
-		// 	return $ex;
-		// }
+	{		
         try {
-            $sql = 'INSERT INTO `Appointment`
+            $sql = 'INSERT INTO `appointments`
             (`dateHour`, `idPatients`)
             VALUES
             (:dateHour, :idPatients);';
@@ -53,14 +33,14 @@ class Appointment
             $sth = $this->_pdo->prepare($sql);
 
             $sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
-            $sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);           
+            $sth->bindValue(':idPatients', $this->_idPatients, PDO::PARAM_INT);           
 
-            if(!$sth->execute()){
-                return 'Message d\'erreur';
+            if(!$sth->execute()){											
+                throw new PDOException('Message d\'erreur');								
             }else{
                 return true;
             }
-        }catch(\PDOException $ex) {
+        }catch(\PDOException $ex) {					
             $errorMessage =  $ex->getMessage();
             return $errorMessage;
         }
@@ -73,7 +53,7 @@ class Appointment
 			$sth = $this->_pdo->prepare('SELECT * FROM `appointments` WHERE `dateHour` = :dateHour AND `idPatients` = :idPatients ;');
 
 			$sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
-			$sth->bindValue(':idPatients', $this->_idPatient, PDO::PARAM_STR);
+			$sth->bindValue(':idPatients', $this->_idPatients, PDO::PARAM_STR);
 
 			if ($sth->execute())
 			{
@@ -93,6 +73,69 @@ class Appointment
 			return $ex;
 		}
 	}
+	public static function list(){
+		$pdo= Database::connect();
+
+        try{
+            $sql = 'SELECT `patients`.`firstname`,
+                 `patients`.`lastname`, `patients`.`phone`,
+                  DATE_FORMAT(`appointments`.`dateHour`,\'%d-%m-%Y\') as `dateAppointment`,
+                DATE_FORMAT(`appointments`.`dateHour`,\'%k:%i\') as `hourAppointment`,
+                   `appointments`.`id` as `idAppointment`,
+                  `appointments`.`idPatients` 
+                 FROM `appointments` 
+                INNER JOIN `patients` ON `patients`.`id`=`appointments`.`idPatients`;';
+            $sth = $pdo->query($sql);
+            $appointments = $sth->fetchAll();
+            return $appointments;
+        }catch(PDOException $ex){
+            die('La requête a retourné une erreur: '. $ex->getMessage());
+        }		
+	}
+	public static function info($id){
+        
+        $sql = 'SELECT * FROM `appointments` WHERE `id`= :id ;';
+        $pdo = Database::connect();
+        try {
+            $sth = $pdo->prepare($sql);
+
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+            if($sth->execute()){
+                $appointments = $sth->fetch();
+                if($appointments){
+                    return $appointments;
+                }else{
+                    return 'n\'existe pas';
+                }
+            }
+        }
+        catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+	public static function modify($id){
+        
+        $sql = 'UPDATE `patients`.`firstname`,
+				`patients`.`lastname`, `patients`.`phone`,
+		 		DATE_FORMAT(`appointments`.`dateHour`,\'%d-%m-%Y\') as `dateAppointment`,
+	   			DATE_FORMAT(`appointments`.`dateHour`,\'%k:%i\') as `hourAppointment`,
+		  		`appointments`.`id` as `idAppointment`,
+		 		`appointments`.`idPatients` 
+				FROM `appointments` 
+	   			INNER JOIN `patients` ON `patients`.`id`=`appointments`.`idPatients`;';
+        try {
+            $pdo = Database::connect();
+            $sth = $pdo->prepare($sql);
+
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);            
+        }
+        catch (\PDOException $ex) {
+            return $ex->getMessage();
+        }
+        
+    }
+
 
 }
 ?>

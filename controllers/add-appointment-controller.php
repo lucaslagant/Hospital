@@ -39,16 +39,14 @@ require_once dirname(__FILE__) . '/../utils/errors.php';
 
 			if ($dateHour >= date('Y-m-d')) {
 
-				$dateHour = "$dateHour:00:00";                
-
-				$appointment = new Appointment($dateHour, $patient_id);                                
-				$created_appointment = $appointment->create();                                                                             
-				if ($created_appointment instanceof PDOException) {
-					$code = $created_appointment->getCode();
+				$appointment = new Appointment($dateHour, $patient_id);				                                
+				$created_appointment = $appointment->create();																																								                                                                            
+				if ($created_appointment instanceof PDOException) {					
+					$code = $created_appointment->getCode();									
 					$returned_message = ERRORS_ARRAY[$code];
 
 				} else {
-					$returned_message = 'Le rendez-vous a bien été enregistré.';					
+					$returned_message = 'Le rendez-vous a bien été enregistré.';											
 				}
 			} else {
 				$returned_message = 'Il est impossible d\'enregistrer un rendez-vous à une date inférieure à celle du jour.';
