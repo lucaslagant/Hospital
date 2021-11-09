@@ -7,7 +7,7 @@
             type="datetime-local"
             name="dateHour"
             id="dateHour"
-            value="<?= htmlentities($_POST['dateHour'] ?? '')?>"
+            value="<?= htmlentities($dateHour ?? '')?>"
             required
             >
         </p>
@@ -15,8 +15,7 @@
         <p>
             <select name="patient" id="patient">
             <?php foreach ($patients as $patient): 
-              $selected = ($patient_id === $patient->id) ? 'selected' : '';
-              
+              $selected = ($patient_id === $patient->id) ? 'selected' : '';                            
             ?>
               <option value="<?=$patient->id?>" <?=$selected?>><?=$patient->lastname?> <?=$patient->firstname?></option>
             <?php endforeach ?>

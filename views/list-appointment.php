@@ -12,17 +12,15 @@
     <tbody>
         <?php
             $i=0;            
-            foreach ($appointmentArray as $appointment) {
-                // var_dump($appointment);
-                // die;
+            foreach ($appointmentArray as $appointment) {                                               
                 $i++;?>                
                 <tr>
-                    <td><?=$appointment->id?></td>
+                    <td><?=$appointment->idPatients?></td>
                     <td><?=$appointment->lastname . ' ' . $appointment->firstname?></td>
                     <td><?=$appointment->dateAppointment ?></td>
                     <td><?=$appointment->hourAppointment ?></td>
                     <td><a href="tel:'<?= $appointment->phone ?>"><?= $appointment->phone ?></a></td>
-                    <td><a href="/controllers/update-appointment-controller.php?appointements=<?=$appointement->id?>"><button>Modifier le rendez-vous du patient</button></a></td>
+                    <td><a href="/controllers/update-appointment-controller.php?appointment=<?=$appointment->idAppointment?>"><button>Modifier le rendez-vous du patient</button></a></td>
 
                 </tr>
     <?php   }?>  

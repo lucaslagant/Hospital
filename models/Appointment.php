@@ -102,9 +102,10 @@ class Appointment
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
             if($sth->execute()){
-                $appointments = $sth->fetch();
-                if($appointments){
-                    return $appointments;
+                $appointment = $sth->fetch();             
+              
+                if($appointment){
+                    return $appointment;
                 }else{
                     return 'n\'existe pas';
                 }
