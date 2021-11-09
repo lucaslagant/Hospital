@@ -18,7 +18,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" href="../index.php">Accueil</a>
+                        <a class="nav-link" href="../index.php">Accueil</a>
                         <a class="nav-link" href="../controllers/add-patient-controller.php">Ajouter un patient</a>
                         <a class="nav-link" href="../../controllers/list-patient-controller.php">Liste des patients</a>
                         <a class="nav-link" href="../../controllers/add-appointment-controller.php">Prendre Rendez-vous</a>

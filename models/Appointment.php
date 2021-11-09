@@ -116,14 +116,9 @@ class Appointment
     }
 	public static function modify($id){
         
-        $sql = 'UPDATE `patients`.`firstname`,
-				`patients`.`lastname`, `patients`.`phone`,
-		 		DATE_FORMAT(`appointments`.`dateHour`,\'%d-%m-%Y\') as `dateAppointment`,
-	   			DATE_FORMAT(`appointments`.`dateHour`,\'%k:%i\') as `hourAppointment`,
-		  		`appointments`.`id` as `idAppointment`,
-		 		`appointments`.`idPatients` 
-				FROM `appointments` 
-	   			INNER JOIN `patients` ON `patients`.`id`=`appointments`.`idPatients`;';
+        $sql = 'UPDATE `appointments` 
+        SET `dateHour`= :dateHour
+        WHERE `appointments.id` = :id ;';
         try {
             $pdo = Database::connect();
             $sth = $pdo->prepare($sql);
