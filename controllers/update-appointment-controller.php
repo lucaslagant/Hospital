@@ -8,9 +8,6 @@ require_once dirname(__FILE__) . '/../utils/regex.php';
 $id = intval(trim(filter_input(INPUT_GET, 'appointment', FILTER_SANITIZE_NUMBER_INT)));
 
 $patients = Patient::list();
-$appointment = Appointment::info($id);
-$patient_id = $appointment->idPatients;
-$dateHour =date('Y-m-d\TH:i',strtotime($appointment->dateHour));
 
 $errors = [];
 $valid = null;
@@ -33,7 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST))
 	}else {
 		$errors['dateHour'] = 'La date n\'est pas remplie';
 	}
+	if (empty($errors)) {
+		$appointment = new Appointment($dateHour, $patient_id);
+		$result = $appointment->modify($id);	
+		
+	}
+	
 }
+$appointment = Appointment::info($id);
+$patient_id = $appointment->idPatients;
+$dateHour =date('Y-m-d\TH:i',strtotime($appointment->dateHour));
+
 
 
 

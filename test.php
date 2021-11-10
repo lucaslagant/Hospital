@@ -12,12 +12,12 @@ $patients = Patient::list();
 
 		if (empty($errors)) {		
 
-			if ($dateHour >= date('Y-m-d')) {
+			if ($dateHour >= date('Y-m-d\TH:i')) {
 
 				$appointment = new Appointment($dateHour, $patient_id);				                                
-				$created_appointment = $appointment->create();																																								                                                                            
-				if ($created_appointment instanceof PDOException) {					
-					$code = $created_appointment->getCode();									
+				$modify_appointment = $appointment->modify($id);																																								                                                                            
+				if ($modify_appointment instanceof PDOException) {					
+					$code = $modify_appointment->getCode();									
 					$returned_message = ERRORS_ARRAY[$code];
 
 				} else {

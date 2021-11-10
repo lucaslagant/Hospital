@@ -115,16 +115,21 @@ class Appointment
             return $e->getMessage();
         }
     }
-	public static function modify($id){
+	public function modify($id){
         
         $sql = 'UPDATE `appointments` 
-        SET `dateHour`= :dateHour
-        WHERE `appointments.id` = :id ;';
+        SET `dateHour`= :dateHour , `idPatients`= :idPatients
+        WHERE `appointments`.`id` = :id ;';
         try {
             $pdo = Database::connect();
             $sth = $pdo->prepare($sql);
 
-            $sth->bindValue(':id', $id, PDO::PARAM_INT);            
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->bindValue(':dateHour', $this->_dateHour, PDO::PARAM_STR);
+            $sth->bindValue(':idPatients', $this->_idPatients, PDO::PARAM_INT);            
+
+            return $sth->execute();
+            
         }
         catch (\PDOException $ex) {
             return $ex->getMessage();
