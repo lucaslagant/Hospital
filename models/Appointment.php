@@ -136,6 +136,30 @@ class Appointment
         }
         
     }
+    public static function delete($id){
+
+        $sql = 'DELETE * FROM `appointments` WHERE `id`= :id ;';
+
+        $pdo = Database::connect();
+        try {
+            $sth = $pdo->prepare($sql);
+
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+
+            if($sth->execute()){
+                $appointment = $sth->fetch();             
+              
+                if($appointment){
+                    return $appointment;
+                }else{
+                    return 'n\'existe pas';
+                }
+            }
+        }
+        catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 
 
 }
