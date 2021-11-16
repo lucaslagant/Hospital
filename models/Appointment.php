@@ -138,7 +138,7 @@ class Appointment
     }
     public static function delete($id){
 
-        $sql = 'DELETE * FROM `appointments` WHERE `id`= :id ;';
+        $sql = 'DELETE FROM `appointments` WHERE `id`= :id ;';
 
         $pdo = Database::connect();
         try {
@@ -147,7 +147,7 @@ class Appointment
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
 
             if($sth->execute()){
-                $appointment = $sth->fetch();             
+                $appointment = $sth->rowCount();            
               
                 if($appointment){
                     return $appointment;

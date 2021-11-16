@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         <?php
-            $i=0;            
+            $i=0;           
             foreach ($appointmentArray as $appointment) {                                               
                 $i++;?>                
                 <tr>
