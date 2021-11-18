@@ -12,7 +12,7 @@
 }
 main{
     background-image: url(../img/building.jpg);
-    height: 533px;;
+    height: 595px;;
     
 
 }
@@ -22,14 +22,14 @@ main{
 }
 
 footer{
-    height: 92px;
+    height: 30px;
 }
 .form{
     margin-top: 10px;
 }
 .tableau-style{
     border-collapse: collapse;
-    min-width: 400px;
+    min-width: 300px;
     width: auto;
     cursor: pointer;
     margin: 50px auto;

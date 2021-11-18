@@ -102,5 +102,31 @@ class Patient{
         }
         
     }
+    public static function readPatientsList($keyword=''){    
+
+    
+        $sql = 'SELECT patients.id, patients.lastname, patients.firstname
+                FROM patients
+                WHERE patients.lastname LIKE :keyword
+                OR patients.firstname
+                LIKE :keyword;';                
+    
+  
+        try{
+            $pdo = Database::connect();
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':keyword', '%'.$keyword.'%', PDO::PARAM_STR);
+        
+            $sth->execute();
+        
+
+            $patientsList = $sth->fetchAll();
+            return $patientsList;
+
+        }catch(\PDOException $ex){
+            return $ex->getMessage();
+        }
+}  
     
 }

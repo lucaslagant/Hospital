@@ -159,7 +159,7 @@ class Appointment
         catch (\PDOException $e) {
             return $e->getMessage();
         }
-    }
+    }   
 
 
 }

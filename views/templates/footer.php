@@ -1,6 +1,6 @@
 <!-- Début footer -->
 <footer class="bg-greyblack text-center fixed-bottom">
-    <h4 class="credit pt-4">Created by Lucas Lagant</h4>    
+    <small class="credit pt-3">Created by Lucas Lagant</small>    
 </footer>
 <!-- Fin footer  -->
 <!-- script JS  -->

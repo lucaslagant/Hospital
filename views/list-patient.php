@@ -1,3 +1,9 @@
+<div class="col-12 d-flex justify-content-center">
+    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="GET" class="d-flex mt-2">
+        <input class="form-control me-2" name="keyword" type="search" placeholder="Rechercher" aria-label="Rechercher">
+        <button class="btn btn-outline-success" type="submit">Go</button>
+    </form>
+</div> 
 <table class="tableau-style">
     <thead>
         <tr>
